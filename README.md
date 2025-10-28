@@ -52,7 +52,7 @@ Follow these steps to get the Blood Management System up and running on your loc
 
 3.  **Create a virtual environment (recommended):**
     ```bash
-    python3.11 -m venv venv
+    python -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
 
@@ -64,19 +64,19 @@ Follow these steps to get the Blood Management System up and running on your loc
 
 5.  **Apply database migrations:**
     ```bash
-    python3.11 manage.py makemigrations
-    python3.11 manage.py migrate
+    python manage.py makemigrations
+    python manage.py migrate
     ```
 
 6.  **Create a superuser (for admin access):**
     ```bash
-    python3.11 manage.py createsuperuser
+    python manage.py createsuperuser
     ```
     Follow the prompts to create an admin username, email, and password.
 
 7.  **Run the development server:**
     ```bash
-    python3.11 manage.py runserver
+    python manage.py runserver
     ```
 
 8.  **Access the application:**
@@ -151,7 +151,27 @@ blood_management_system/
 └── db.sqlite3 # This file will be created after migrations
 ```
 
-## Contact
+## Project Screenshot 
+<p align="center">
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20085525.png?raw=true" />
+    <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20085554.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20085620.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20085702.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20085821.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20085845.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20085913.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20085936.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20090001.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20090025.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20090050.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20090143.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20090205.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20091130.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20091206.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20091234.png?raw=true" />
+  <img width="600" src="https://github.com/RlM100always/Hisab/blob/main/bms/Screenshot%202025-10-28%20091258.png?raw=true" />
+  
+  </p>
 
-For any questions or issues, please contact [Your Name/Email/GitHub Profile].
+
 
