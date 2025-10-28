@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Donor Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Donor Details: {{ donor.user.username }}</h1>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Username:</strong> {{ donor.user.username }}</p>
+            <p><strong>Email:</strong> {{ donor.user.email }}</p>
+            <p><strong>Blood Group:</strong> {{ donor.blood_group }}</p>
+            <p><strong>Date of Birth:</strong> {{ donor.date_of_birth|default:"N/A" }}</p>
+            <p><strong>Last Donation Date:</strong> {{ donor.last_donation_date|default:"N/A" }}</p>
+            <p><strong>Phone Number:</strong> {{ donor.phone_number|default:"N/A" }}</p>
+            <p><strong>Address:</strong> {{ donor.address|default:"N/A" }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'donor_list' %}" class="btn btn-secondary">Back to List</a>
+            <!-- <a href="{% url 'blood_bank_update' bb.pk %}" class="btn btn-warning btn-sm">Edit</a> -->
+            <a href="{% url 'blood_bank_update' donor.blood_bank.id %}">Update Blood Bank</a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

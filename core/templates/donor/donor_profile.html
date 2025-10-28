@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Donor Profile{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <!-- Header -->
+                <div class="card-header bg-danger text-white text-center rounded-top-4 py-4">
+                    <h3 class="fw-bold mb-1">Update Profile</h3>
+                    <p class="mb-0 small opacity-75">Keep your donor information updated</p>
+                </div>
+
+                <div class="card-body px-4 py-4">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Better field rendering -->
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'donor_dashboard' %}"
+                               class="btn btn-outline-secondary rounded-3 px-4 fw-semibold">
+                                Back
+                            </a>
+                            <button type="submit"
+                                    class="btn btn-danger rounded-3 px-4 fw-semibold">
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    input, select, textarea {
+        border-radius: 0.6rem !important;
+        padding: 0.7rem !important;
+        font-size: 0.95rem !important;
+    }
+    .card {
+        transition: .3s;
+    }
+    .card:hover {
+        transform: translateY(-3px);
+    }
+</style>
+{% endblock %}

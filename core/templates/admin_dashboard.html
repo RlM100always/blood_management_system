@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Admin Dashboard</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Total Donors</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_donors }}</h5>
+                    <p class="card-text">Number of registered donors.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Pending Donations</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ pending_donations }}</h5>
+                    <p class="card-text">Donations awaiting approval.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Approved Donations</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ approved_donations }}</h5>
+                    <p class="card-text">Donations successfully approved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header">Rejected Donations</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ rejected_donations }}</h5>
+                    <p class="card-text">Donations that were rejected.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="my-4">Management</h2>
+    <div class="list-group">
+        <a href="{% url 'blood_bank_list' %}" class="list-group-item list-group-item-action">Manage Blood Banks</a>
+        <a href="{% url 'donor_list' %}" class="list-group-item list-group-item-action">Manage Donors</a>
+        <a href="{% url 'blood_request_list' %}" class="list-group-item list-group-item-action">Manage Blood Requests</a>
+        <a href="{% url 'donation_list' %}" class="list-group-item list-group-item-action">Manage Donations</a>
+    </div>
+</div>
+{% endblock %}

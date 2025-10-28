@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Blood Bank Detail{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Blood Bank Details: {{ blood_bank.name }}</h1>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Name:</strong> {{ blood_bank.name }}</p>
+            <p><strong>Location:</strong> {{ blood_bank.location }}</p>
+            <p><strong>Contact Number:</strong> {{ blood_bank.contact_number|default:"N/A" }}</p>
+            <p><strong>Email:</strong> {{ blood_bank.email|default:"N/A" }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'blood_bank_list' %}" class="btn btn-secondary">Back to List</a>
+            <a href="#" class="btn btn-warning">Edit</a> {# TODO: Add URL for editing blood bank #}
+        </div>
+    </div>
+</div>
+{% endblock %}

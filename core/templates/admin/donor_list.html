@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Donor List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Donors</h1>
+
+    <form method="GET" class="row g-3 align-items-center mb-4">
+        <div class="col-md-4">
+            <input type="text" name="q" class="form-control" placeholder="Search by username or blood group" value="{{ query|default:'' }}">
+        </div>
+        <div class="col-md-3">
+            <select name="blood_group" class="form-select">
+                <option value="All">All Blood Groups</option>
+                {% for bg in blood_groups %}
+                <option value="{{ bg }}" {% if bg == selected_blood_group %}selected{% endif %}>{{ bg }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Search/Filter</button>
+        </div>
+        <div class="col-md-3 text-end">
+            <a href="{% url 'donation_create' %}" class="btn btn-success">Add New Donor</a> {# TODO: Add URL for adding new donor #}
+        </div>
+    </form>
+
+    {% if donors %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Blood Group</th>
+                <th>Last Donation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donor in donors %}
+            <tr>
+                <td>{{ donor.user.username }}</td>
+                <td>{{ donor.blood_group }}</td>
+                <td>{{ donor.last_donation_date|default:"N/A" }}</td>
+                <td>
+                    <a href="{% url 'donor_detail' donor.pk %}" class="btn btn-info btn-sm">View</a>
+                    {# TODO: Add URLs for editing and deleting donors #}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No donors found matching your criteria.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <!-- Header -->
+                <div class="card-header bg-primary text-white text-center rounded-top-4 py-4 " style="background: linear-gradient(120deg, #ff416c, #ff4b2b); ">
+                    <h3 class="mb-0 fw-bold">Welcome Back</h3>
+                    <p class="mb-0 small opacity-75">Sign in to continue</p>
+                </div>
+
+                <!-- Form Body -->
+                <div class="card-body px-4 py-4">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Improved field rendering -->
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">{{ field.label }}</label>
+                                {{ field }}
+                                {% for error in field.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold rounded-3" style="background: linear-gradient(120deg, #ff416c, #ff4b2b); " >
+                            Login
+                        </button>
+                    </form>
+
+                    <!-- Divider & Link -->
+                    <div class="text-center mt-3">
+                        <small class="text-muted">Don't have an account?</small><br>
+                        <a href="{% url 'register' %}" class="text-decoration-none fw-semibold">
+                            Register here
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    input {
+        border-radius: 0.6rem !important;
+        padding: 0.7rem !important;
+        font-size: 0.95rem !important;
+    }
+    .card {
+        transition: .3s;
+    }
+    .card:hover {
+        transform: translateY(-3px);
+    }
+</style>
+{% endblock %}

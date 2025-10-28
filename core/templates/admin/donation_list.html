@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Donation List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Donations</h1>
+
+    <form method="GET" class="row g-3 align-items-center mb-4">
+        <div class="col-md-4">
+            <input type="text" name="q" class="form-control" placeholder="Search by donor username or blood group" value="{{ query|default:'' }}">
+        </div>
+        <div class="col-md-3">
+            <select name="blood_group" class="form-select">
+                <option value="All">All Blood Groups</option>
+                {% for bg in blood_groups %}
+                <option value="{{ bg }}" {% if bg == selected_blood_group %}selected{% endif %}>{{ bg }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select name="status" class="form-select">
+                <option value="All">All Statuses</option>
+                {% for status_option in statuses %}
+                <option value="{{ status_option }}" {% if status_option == selected_status %}selected{% endif %}>{{ status_option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Search/Filter</button>
+        </div>
+    </form>
+
+    {% if donations %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Donor</th>
+                <th>Blood Bank</th>
+                <th>Donation Date</th>
+                <th>Blood Group</th>
+                <th>Units Donated</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donation in donations %}
+            <tr>
+                <td>{{ donation.donor.user.username }}</td>
+                <td>{{ donation.blood_bank.name }}</td>
+                <td>{{ donation.donation_date }}</td>
+                <td>{{ donation.blood_group }}</td>
+                <td>{{ donation.units_donated }}</td>
+                <td>{{ donation.status }}</td>
+                <td>
+                    {% if donation.status == 'Pending' %}
+                    <a href="{% url 'approve_donation' donation.pk %}" class="btn btn-success btn-sm">Approve</a>
+                    <a href="{% url 'reject_donation' donation.pk %}" class="btn btn-danger btn-sm">Reject</a>
+                    {% else %}
+                    {{ donation.status }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No donations found matching your criteria.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

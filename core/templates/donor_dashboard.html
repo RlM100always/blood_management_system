@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Donor Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Donor Dashboard</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Your Profile</div>
+                <div class="card-body">
+                    <p><strong>Username:</strong> {{ donor.user.username }}</p>
+                    <p><strong>Blood Group:</strong> {{ donor.blood_group }}</p>
+                    <p><strong>Last Donation:</strong> {{ donor.last_donation_date|default:"N/A" }}</p>
+                    <a href="{% url 'donor_profile' %}" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Actions</div>
+                <div class="card-body">
+                    <a href="{% url 'make_blood_request' %}" class="btn btn-success mb-2">Make Blood Request</a>
+                    <a href="{% url 'donor_donation_history' %}" class="btn btn-info mb-2">View Donation History</a>
+                    <a href="{% url 'donor_blood_requests' %}" class="btn btn-warning mb-2">View Your Blood Requests</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="my-4">Your Recent Donations</h2>
+    {% if donations %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Blood Bank</th>
+                <th>Blood Group</th>
+                <th>Units Donated</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donation in donations %}
+            <tr>
+                <td>{{ donation.donation_date }}</td>
+                <td>{{ donation.blood_bank.name }}</td>
+                <td>{{ donation.blood_group }}</td>
+                <td>{{ donation.units_donated }}</td>
+                <td>{{ donation.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No donations recorded yet.</p>
+    {% endif %}
+
+    <h2 class="my-4">Your Recent Blood Requests</h2>
+    {% if blood_requests %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Request Date</th>
+                <th>Blood Group</th>
+                <th>Units Required</th>
+                <th>Urgency</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in blood_requests %}
+            <tr>
+                <td>{{ request.request_date }}</td>
+                <td>{{ request.blood_group }}</td>
+                <td>{{ request.units_required }}</td>
+                <td>{{ request.urgency }}</td>
+                <td>{% if request.is_approved %}Approved{% else %}Pending{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No blood requests made yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

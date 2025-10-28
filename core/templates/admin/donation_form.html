@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }} Donation{% endblock %}
+
+{% block content %}
+<div class="container">
+    
+    <h1 class="my-4">{{ action }} Donation</h1>
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="{% url 'donation_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

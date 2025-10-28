@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Delete Blood Bank{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Confirm Delete Blood Bank</h1>
+    <div class="alert alert-danger" role="alert">
+        Are you sure you want to delete the blood bank "{{ blood_bank.name }}"?
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'blood_bank_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

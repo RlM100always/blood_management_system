@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }} Blood Bank{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <!-- Card -->
+            <div class="card shadow border-0 rounded-4">
+                
+                <!-- Header -->
+                <div class="card-header text-white text-center py-4" style="background: linear-gradient(120deg, #ff416c, #ff4b2b);">
+                    <h2 class="mb-1">{{ action }} Blood Bank</h2>
+                    <small class="opacity-75">All fields are required unless noted otherwise</small>
+                </div>
+
+                <!-- Card body -->
+                <div class="card-body p-4">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label fw-semibold">{{ field.label }}</label>
+                            <div class="input-group">
+                                <!-- Optional icon -->
+                                <span class="input-group-text bg-light">
+                                    {% if field.name == 'name' %}
+                                        <i class="bi bi-person-fill"></i>
+                                    {% elif field.name == 'city' %}
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                    {% elif field.name == 'blood_type' %}
+                                        <i class="bi bi-droplet-fill"></i>
+                                    {% else %}
+                                        <i class="bi bi-pencil-fill"></i>
+                                    {% endif %}
+                                </span>
+                                {{ field }}
+                            </div>
+
+                            <!-- Help text -->
+                            {% if field.help_text %}
+                                <div class="form-text">{{ field.help_text }}</div>
+                            {% endif %}
+
+                            <!-- Errors -->
+                            {% for error in field.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="{% url 'blood_bank_list' %}" class="btn btn-outline-secondary btn-lg">Cancel</a>
+                            <button type="submit" class="btn btn-danger btn-lg shadow-sm">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Footer -->
+                <div class="card-footer text-center text-muted">
+                    &copy; {{ now.year }} Blood Management System
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Styling -->
+<style>
+    input, select, textarea {
+        border-radius: 0.5rem;
+        padding: 0.6rem 0.75rem;
+        font-size: 1rem;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        transition: all 0.3s ease;
+    }
+
+    .btn-danger:hover {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .input-group-text i {
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    .form-label {
+        font-weight: 600;
+    }
+</style>
+
+{% endblock %}
